@@ -2,6 +2,8 @@ package info.victorchu.result;
 
 import info.victorchu.input.Input;
 
+import java.util.function.Function;
+
 public class Success<I,R> implements ParsedResult<I,R> {
     private final Input<I> next;
     private final R reply;
@@ -23,6 +25,11 @@ public class Success<I,R> implements ParsedResult<I,R> {
     @Override
     public R getReply() {
         return reply;
+    }
+
+    @Override
+    public <U> ParsedResult<I, U> map(Function<R, U> function) {
+        return new Success<>(this.next,function.apply(reply));
     }
 
     @Override

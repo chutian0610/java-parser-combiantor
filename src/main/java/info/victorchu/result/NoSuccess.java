@@ -2,6 +2,8 @@ package info.victorchu.result;
 
 import info.victorchu.input.Input;
 
+import java.util.function.Function;
+
 public abstract class NoSuccess<I,R> implements ParsedResult<I,R>  {
     protected final Input<I> next;
     protected final String message;
@@ -23,5 +25,17 @@ public abstract class NoSuccess<I,R> implements ParsedResult<I,R>  {
     @Override
     public R getReply() {
         throw new IllegalStateException("No result when parsing failed!");
+    }
+
+    /**
+     * no success result has no reply, so no need to call the function
+     * and the unchecked type cast is safe
+     * @param function
+     * @param <U>
+     * @return
+     */
+    @Override
+    public <U> ParsedResult<I, U> map(Function<R, U> function) {
+        return (NoSuccess<I, U>) this;
     }
 }
