@@ -8,20 +8,8 @@ import info.victorchu.result.ParsedResult;
  * @param <I>
  * @param <R>
  */
-public abstract class Parser<I,R> {
-
-    /**
-     * parser name
-     */
-    protected String name = "";
-
-    public String name(){
-        return name;
-    }
-
-    public void named(String n){
-        name = n;
-    }
+@FunctionalInterface
+public interface Parser<I,R> {
 
     /**
      * parse the given input and return ParsedResult,which contains
@@ -32,7 +20,15 @@ public abstract class Parser<I,R> {
      * @param input warped input, support get location and etc.
      * @return
      */
-    public abstract ParsedResult<I,R> parse(Input<I> input);
+    ParsedResult<I,R> parse(Input<I> input);
 
+    /**
+     * named parser
+     * @param name
+     * @return
+     */
+    default Parser<I,R> named(String name){
+        return NamedParser.named(name,this);
+    }
 
 }

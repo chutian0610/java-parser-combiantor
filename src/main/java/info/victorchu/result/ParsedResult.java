@@ -1,6 +1,5 @@
 package info.victorchu.result;
 
-import info.victorchu.Parser;
 import info.victorchu.input.Input;
 import info.victorchu.util.Printable;
 

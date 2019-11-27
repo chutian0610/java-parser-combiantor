@@ -5,5 +5,4 @@ package info.victorchu;
  */
 public abstract class Combinators {
 
-
 }
