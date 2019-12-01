@@ -22,7 +22,7 @@ public abstract class Combinators {
     }
 
     public static <I,R,U> Parser<I,U> bind(Parser<I,R> parser, Function<R,Parser<I,U>> function){
-        
+
     }
 
 }
