@@ -24,12 +24,4 @@ public interface ParsedResult<I,R> extends Printable {
      * @return
      */
     R getReply();
-
-    /**
-     * use function to cast reply type from R to U
-     * @param function
-     * @param <U>
-     * @return
-     */
-    <U> ParsedResult<I,U> map(Function<R,U> function);
 }

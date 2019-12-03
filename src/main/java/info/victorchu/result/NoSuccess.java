@@ -28,14 +28,13 @@ public abstract class NoSuccess<I,R> implements ParsedResult<I,R>  {
     }
 
     /**
-     * no success result has no reply, so no need to call the function
-     * and the unchecked type cast is safe
-     * @param function
+     * for fast cast type
      * @param <U>
      * @return
      */
-    @Override
-    public <U> ParsedResult<I, U> map(Function<R, U> function) {
-        return (NoSuccess<I, U>) this;
+    public <U>  ParsedResult<I, U> cast() {
+        return (NoSuccess<I, U>)this;
     }
+
+
 }

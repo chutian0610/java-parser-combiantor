@@ -1,5 +1,8 @@
 package info.victorchu;
 
+import info.victorchu.input.Input;
+import info.victorchu.result.NoSuccess;
+import info.victorchu.result.ParsedResult;
 import info.victorchu.result.Success;
 
 import java.util.function.Function;
@@ -12,17 +15,39 @@ public abstract class Combinators {
     /**
      * return combinator
      * succeeds immediately without consuming any input, and return supplied value.
-     * @param x
-     * @param <I>
-     * @param <R>
+     * @param x      supplied value
+     * @param <I>    input type
+     * @param <R>    result type
      * @return
      */
     public static <I,R> Parser<I,R> retn(R x){
         return ((Parser<I, R>) input -> new Success<>(input, x)).named("return -> "+x);
     }
 
-    public static <I,R,U> Parser<I,U> bind(Parser<I,R> parser, Function<R,Parser<I,U>> function){
 
+    /**
+     * bind combinator
+     * if first parser p succeed, the result is determinded by the second parser in bind function
+     * otherwise, return the result of parser p
+     * @param parser    first parser p
+     * @param function  bind function
+     * @param <I>       input type
+     * @param <R>       result type of first parser p
+     * @param <U>       result type of second parser
+     * @return
+     */
+    public static <I,R,U> Parser<I,U> bind(Parser<I,R> parser, Function<R,Parser<I,U>> function){
+        return new Parser<I, U>() {
+            @Override
+            public ParsedResult<I, U> parse(Input<I> input) {
+                ParsedResult<I,R> result = parser.parse(input);
+                if(result.successful()){
+                    return function.apply(result.getReply()).parse(result.next());
+                }else {
+                    return ((NoSuccess) result);
+                }
+            }
+        };
     }
 
 }
