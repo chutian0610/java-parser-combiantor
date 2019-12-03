@@ -3,6 +3,8 @@ package info.victorchu;
 import info.victorchu.input.Input;
 import info.victorchu.result.ParsedResult;
 
+import java.util.function.Function;
+
 /**
  * parser monad
  * @param <I>
@@ -29,6 +31,11 @@ public interface Parser<I,R> {
      */
     default Parser<I,R> named(String name){
         return NamedParser.named(name,this);
+    }
+
+    // ======================== stream api style =========================
+    default <U> Parser<I,U> bind(Function<R,Parser<I,U>> function){
+        return Combinators.bind(this,function);
     }
 
 }

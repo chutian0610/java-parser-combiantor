@@ -1,6 +1,5 @@
 package info.victorchu;
 
-import info.victorchu.input.Input;
 import info.victorchu.result.NoSuccess;
 import info.victorchu.result.ParsedResult;
 import info.victorchu.result.Success;
@@ -21,7 +20,7 @@ public abstract class Combinators {
      * @return
      */
     public static <I,R> Parser<I,R> retn(R x){
-        return ((Parser<I, R>) input -> new Success<>(input, x)).named("return -> "+x);
+        return ((Parser<I, R>) input -> new Success<>(input, x)).named("return");
     }
 
 
@@ -37,17 +36,14 @@ public abstract class Combinators {
      * @return
      */
     public static <I,R,U> Parser<I,U> bind(Parser<I,R> parser, Function<R,Parser<I,U>> function){
-        return new Parser<I, U>() {
-            @Override
-            public ParsedResult<I, U> parse(Input<I> input) {
-                ParsedResult<I,R> result = parser.parse(input);
-                if(result.successful()){
-                    return function.apply(result.getReply()).parse(result.next());
-                }else {
-                    return ((NoSuccess) result);
-                }
+        return ((Parser<I, U>)input -> {
+            ParsedResult<I,R> result = parser.parse(input);
+            if(result.successful()){ // first parser succeed
+                return function.apply(result.getReply()).parse(result.next());
+            }else {
+                return ((NoSuccess) result); // return first error
             }
-        };
+        }).named("bind");
     }
 
 }
