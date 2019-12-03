@@ -25,6 +25,20 @@ public abstract class Combinators {
 
 
     /**
+     * map combinator
+     * if parser succeed, apply function to result.
+     * @param parser
+     * @param function
+     * @param <I>
+     * @param <R>
+     * @param <U>
+     * @return
+     */
+    public static <I,R,U> Parser<I,U> map(Parser<I,R> parser, Function<R,U> function){
+        return input -> parser.parse(input).map(function);
+    }
+
+    /**
      * bind combinator
      * if first parser p succeed, the result is determinded by the second parser in bind function
      * otherwise, return the result of parser p

@@ -28,6 +28,11 @@ public class Success<I,R> implements ParsedResult<I,R> {
     }
 
     @Override
+    public <U> ParsedResult<I, U> map(Function<R, U> function) {
+        return new Success<>(this.next,function.apply(reply));
+    }
+
+    @Override
     public String print() {
         return "["+ next.position()+"] parsed: "+ reply;
     }
