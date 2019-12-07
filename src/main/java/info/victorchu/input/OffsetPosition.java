@@ -92,7 +92,7 @@ public class OffsetPosition implements Position {
      * @return
      */
     @Override
-    public String print() {
+    public String toString() {
         return line() + "." + column();
     }
 

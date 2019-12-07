@@ -33,21 +33,4 @@ public interface Parser<I,R> {
         return NamedParser.named(name,this);
     }
 
-    /**
-     * map function
-     * if parser succeed, apply function to result.
-     * @param parser
-     * @param function
-     * @param <U>
-     * @return
-     */
-    default  <U> Parser<I,U> map(Parser<I,R> parser, Function<R,U> function){
-        return input -> parser.parse(input).map(function);
-    }
-
-    // ======================== stream api style =========================
-    default <U> Parser<I,U> bind(Function<R,Parser<I,U>> function){
-        return Combinators.bind(this,function);
-    }
-
 }

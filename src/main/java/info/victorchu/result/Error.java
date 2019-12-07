@@ -8,7 +8,7 @@ public class Error<I,R> extends NoSuccess<I,R> {
     }
 
     @Override
-    public String print() {
+    public String toString() {
         return "["+next.position()+"] error: "
                 +message+"\n\n"+next.position().visualString();
     }

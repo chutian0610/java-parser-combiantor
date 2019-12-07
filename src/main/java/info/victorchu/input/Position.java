@@ -1,9 +1,6 @@
 package info.victorchu.input;
 
-
-import info.victorchu.util.Printable;
-
-public interface Position extends Printable {
+public interface Position {
     /**
      * return line of position
      * @return

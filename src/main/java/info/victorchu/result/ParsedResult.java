@@ -5,7 +5,7 @@ import info.victorchu.util.Printable;
 
 import java.util.function.Function;
 
-public interface ParsedResult<I,R> extends Printable {
+public interface ParsedResult<I,R> {
 
     /**
      * return the input after parser parsed
