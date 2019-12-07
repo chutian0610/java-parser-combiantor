@@ -30,5 +30,5 @@ public interface ParsedResult<I,R> {
      * @param <U>
      * @return
      */
-    <U> ParsedResult<I,U> map(Function<R,U> function);
+    <U> ParsedResult<I,U> map(Function<ParsedResult<I,R>,ParsedResult<I,U>> function);
 }

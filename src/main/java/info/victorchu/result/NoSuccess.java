@@ -35,8 +35,8 @@ public abstract class NoSuccess<I,R> implements ParsedResult<I,R>  {
      * @return
      */
     @Override
-    public <U> ParsedResult<I, U> map(Function<R, U> function) {
-        return (NoSuccess<I, U>) this;
+    public <U> ParsedResult<I, U> map(Function<ParsedResult<I,R>, ParsedResult<I,U>> function) {
+        return function.apply(this);
     }
 
     /**

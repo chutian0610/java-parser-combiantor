@@ -27,8 +27,8 @@ public class Success<I,R> implements ParsedResult<I,R> {
     }
 
     @Override
-    public <U> ParsedResult<I, U> map(Function<R, U> function) {
-        return new Success<>(this.next,function.apply(reply));
+    public <U> ParsedResult<I, U> map(Function<ParsedResult<I,R>, ParsedResult<I,U>> function) {
+        return new Success<>(this.next,function.apply(this).getReply());
     }
 
     @Override

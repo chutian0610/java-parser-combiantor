@@ -36,7 +36,15 @@ public abstract class Combinators {
      * @return
      */
     public static <I,U,R> Parser<I,U> map(Parser<I,R> parser, Function<R,U> function){
-        return input -> parser.parse(input).map(function);
+        return input -> parser.parse(input).map(new Function<ParsedResult<I, R>, ParsedResult<I, U>>() {
+            @Override
+            public ParsedResult<I, U> apply(ParsedResult<I, R> irParsedResult) {
+                if(irParsedResult.successful()){
+                    return new Success<>(irParsedResult.next(),function.apply(irParsedResult.getReply()));
+                }
+                return ((NoSuccess) irParsedResult);
+            }
+        });
     }
 
     /**
@@ -72,7 +80,7 @@ public abstract class Combinators {
      * @return
      */
     public static <I,R,U> Parser<I,MergeResult<R,U>> seq(Parser<I,R> p,Parser<I,U> q){
-
+        return null;
     }
 
 }
