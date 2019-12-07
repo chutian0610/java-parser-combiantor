@@ -1,8 +1,6 @@
 package info.victorchu.result;
 
 import info.victorchu.input.Input;
-import info.victorchu.util.Printable;
-
 import java.util.function.Function;
 
 public class Success<I,R> implements ParsedResult<I,R> {

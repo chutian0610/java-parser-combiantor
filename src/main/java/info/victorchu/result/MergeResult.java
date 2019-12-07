@@ -10,6 +10,6 @@ public class MergeResult<R,U> {
 
     @Override
     public String toString() {
-        return "merge<"+r+","+u+">";
+        return "<"+r+" merge "+u+">";
     }
 }

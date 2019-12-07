@@ -1,5 +1,6 @@
 package info.victorchu;
 
+import info.victorchu.result.MergeResult;
 import info.victorchu.result.NoSuccess;
 import info.victorchu.result.ParsedResult;
 import info.victorchu.result.Success;
@@ -60,5 +61,18 @@ public abstract class Combinators {
         }).named("bind");
     }
 
+    /**
+     * seq combinator
+     * seq succeeds if p succeeds and q succeeds on the input left over by p.
+     * @param p
+     * @param q
+     * @param <I>
+     * @param <R>
+     * @param <U>
+     * @return
+     */
+    public static <I,R,U> Parser<I,MergeResult<R,U>> seq(Parser<I,R> p,Parser<I,U> q){
+
+    }
 
 }
