@@ -14,7 +14,7 @@ import java.util.function.Function;
 public interface Parser<I,R> {
 
     /**
-     * parse the given input and return ParsedResult,which contains
+     * apply the given input and return ParsedResult,which contains
      *  1. parsed status
      *  2. message
      *  3. remained input
@@ -22,7 +22,7 @@ public interface Parser<I,R> {
      * @param input warped input, support get location and etc.
      * @return
      */
-    ParsedResult<I,R> parse(Input<I> input);
+    ParsedResult<I,R> apply(Input<I> input);
 
     /**
      * named parser

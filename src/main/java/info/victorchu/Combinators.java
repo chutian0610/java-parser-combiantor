@@ -1,6 +1,5 @@
 package info.victorchu;
 
-import info.victorchu.result.MergeResult;
 import info.victorchu.result.NoSuccess;
 import info.victorchu.result.ParsedResult;
 import info.victorchu.result.Success;
@@ -36,7 +35,7 @@ public abstract class Combinators {
      * @return
      */
     public static <I,U,R> Parser<I,U> map(Parser<I,R> parser, Function<R,U> function){
-        return input -> parser.parse(input).map(new Function<ParsedResult<I, R>, ParsedResult<I, U>>() {
+        return input -> parser.apply(input).map(new Function<ParsedResult<I, R>, ParsedResult<I, U>>() {
             @Override
             public ParsedResult<I, U> apply(ParsedResult<I, R> irParsedResult) {
                 if(irParsedResult.successful()){
@@ -60,9 +59,9 @@ public abstract class Combinators {
      */
     public static <I,R,U> Parser<I,U> bind(Parser<I,R> parser, Function<R,Parser<I,U>> function){
         return ((Parser<I, U>)input -> {
-            ParsedResult<I,R> result = parser.parse(input);
+            ParsedResult<I,R> result = parser.apply(input);
             if(result.successful()){ // first parser succeed
-                return function.apply(result.getReply()).parse(result.next());
+                return function.apply(result.getReply()).apply(result.next());
             }else {
                 return ((NoSuccess) result).cast(); // return first error
             }
@@ -79,8 +78,5 @@ public abstract class Combinators {
      * @param <U>
      * @return
      */
-    public static <I,R,U> Parser<I,MergeResult<R,U>> seq(Parser<I,R> p,Parser<I,U> q){
-        return null;
-    }
 
 }

@@ -25,7 +25,7 @@ public class NamedParser<I,R> implements Parser<I,R>{
     }
 
     @Override
-    public ParsedResult<I, R> parse(Input<I> input) {
-        return embeddedParser.parse(input);
+    public ParsedResult<I, R> apply(Input<I> input) {
+        return embeddedParser.apply(input);
     }
 }

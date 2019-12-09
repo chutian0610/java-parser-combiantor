@@ -13,7 +13,7 @@ public interface ParsedResult<I,R> {
     Input<I> next();
 
     /**
-     * true, if an successful parse action
+     * true, if an successful apply action
      * @return
      */
     boolean successful();
