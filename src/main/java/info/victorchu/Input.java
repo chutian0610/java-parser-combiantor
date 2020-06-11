@@ -1,35 +1,42 @@
-package info.victorchu.input;
+package info.victorchu;
 
 
 import java.util.List;
 
-public interface Input<I> {
+/**
+ * parseFunction 输入.
+ *
+ * @param <IN> 输入元素类型
+ * @author <a href="mailto:victorchu0610@outlook.com">victor.chu</a>
+ * @version 1.0.0
+ */
+public interface Input<IN> {
 
 
     /**
      * return Input consisting of all elements except the first
      * @return
      */
-    Input<I> rest();
+    Input<IN> rest();
 
     /**
      * return Input consisting of all elements except the first n
      * @return
      */
-    Input<I> rest(int n);
+    Input<IN> rest(int n);
 
     /**
      * return the first element
      * @return
      */
-    I first();
+    IN first();
 
     /**
      * return the first n elements
      * @param n
      * @return
      */
-    List<I> first(int n);
+    List<IN> first(int n);
     /**
      * position of the first element in Input
      * @return

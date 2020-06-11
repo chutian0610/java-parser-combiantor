@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 import java.util.function.Supplier;
 
+import info.victorchu.Position;
+
 public class OffsetPosition implements Position {
     // threadlocal cache map
     private static ThreadLocal<Map<CharSequence, List<Integer>>> lineCacheTL =
@@ -66,6 +68,7 @@ public class OffsetPosition implements Position {
         return offset - indexs.get(line() - 1) + 1;
     }
 
+    @Override
     public String lineContents() {
         List<Integer> indexs = getLineStarts();
         int line = line();

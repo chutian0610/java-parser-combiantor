@@ -1,4 +1,4 @@
-package info.victorchu.input;
+package info.victorchu;
 
 public interface Position {
     /**

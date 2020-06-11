@@ -1,10 +1,11 @@
 package info.victorchu.result;
 
-import info.victorchu.input.Input;
+import info.victorchu.ParsedResult;
+import info.victorchu.Input;
 
 import java.util.function.Function;
 
-public abstract class NoSuccess<I,R> implements ParsedResult<I,R>  {
+public abstract class NoSuccess<I,R> implements ParsedResult<I,R> {
     protected final Input<I> next;
     protected final String message;
     public NoSuccess(Input<I> next, String message) {

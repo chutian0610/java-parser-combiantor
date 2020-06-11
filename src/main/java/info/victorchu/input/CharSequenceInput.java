@@ -3,6 +3,9 @@ package info.victorchu.input;
 import java.util.ArrayList;
 import java.util.List;
 
+import info.victorchu.Input;
+import info.victorchu.Position;
+
 public class CharSequenceInput implements CharInput {
     protected final CharSequence charSequence;
     protected final int index;

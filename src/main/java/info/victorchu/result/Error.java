@@ -1,6 +1,6 @@
 package info.victorchu.result;
 
-import info.victorchu.input.Input;
+import info.victorchu.Input;
 
 public class Error<I,R> extends NoSuccess<I,R> {
     public Error(Input<I> next, String message) {

@@ -1,36 +1,23 @@
 package info.victorchu;
 
-import info.victorchu.input.Input;
-import info.victorchu.result.ParsedResult;
-
-import java.util.function.Function;
-
 /**
- * parser monad
- * @param <I>
- * @param <R>
+ * 表示一个parse monad
+ * <pre>
+ *    parser = IN -> Result(IN,OUT)
+ * </pre>
+ *
+ * @param <IN>  输入类型
+ * @param <OUT>  输出类型
+ * @author <a href="mailto:victorchu0610@outlook.com">victor.chu</a>
+ * @version 1.0.0
  */
 @FunctionalInterface
-public interface Parser<I,R> {
+public interface Parser<IN,OUT> {
 
     /**
-     * apply the given input and return ParsedResult,which contains
-     *  1. parsed status
-     *  2. message
-     *  3. remained input
-     *  4. parsed result R
-     * @param input warped input, support get location and etc.
+     * parse monad 的主要逻辑
+     * @param input 输入
      * @return
      */
-    ParsedResult<I,R> apply(Input<I> input);
-
-    /**
-     * named parser
-     * @param name
-     * @return
-     */
-    default Parser<I,R> named(String name){
-        return NamedParser.named(name,this);
-    }
-
+    ParsedResult<IN,OUT> apply(Input<IN> input);
 }
